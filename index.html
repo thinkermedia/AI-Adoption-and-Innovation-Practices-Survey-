@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast Company AI Innovation Survey 2026</title>
+<style>
+/* ── ROOT VARIABLES (TMG established palette) ── */
+:root {
+  --dark:        #0d1b2a;
+  --blue:        #1a6faf;
+  --blue-light:  #2a8fd4;
+  --blue-mid:    #1557a0;
+  --accent-bg:   #e8f4fd;
+  --border:      #c8dff0;
+  --text:        #1a2b3c;
+  --muted:       #5a7a94;
+  --bg:          #eaf3fb;
+  --white:       #ffffff;
+  --gold:        #C9A84C;
+  --radius:      10px;
+  --card-shadow: 0 2px 18px rgba(26,111,175,0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--dark);
+  padding: 0;
+  border-bottom: 3px solid var(--blue);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.22);
+}
+
+.header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo-fc {
+  background: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+}
+.logo-fc img  { height: 40px; display: block; }
+.logo-tmg { display: flex; align-items: center; }
+.logo-tmg img { height: 72px; display: block; }
+
+.header-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.header-divider-line { width: 1px; height: 24px; background: rgba(255,255,255,0.25); }
+.header-divider-text {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  background: var(--dark);
+  padding: 0 24px 12px;
+}
+.progress-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.progress-track {
+  background: rgba(255,255,255,0.10);
+  border-radius: 20px;
+  height: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--blue-light);
+  border-radius: 20px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 7px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── MAIN LAYOUT ── */
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── CARD ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.card-top {
+  background: var(--dark);
+  padding: 18px 24px 16px;
+}
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #6bbfe8;
+  margin-bottom: 5px;
+}
+.q-num-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.90);
+  letter-spacing: 0.3px;
+}
+
+.card-body { padding: 24px 24px 28px; }
+
+.q-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.45;
+  margin-bottom: 5px;
+}
+.q-instr {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-style: italic;
+}
+
+/* ── OPTIONS ── */
+.options-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+.option-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.14s, background 0.14s;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: #fafcff;
+  user-select: none;
+  line-height: 1.45;
+}
+.option-label:hover {
+  border-color: var(--blue-light);
+  background: var(--accent-bg);
+}
+.option-label.selected {
+  border-color: var(--blue);
+  background: var(--accent-bg);
+  font-weight: 600;
+  color: var(--dark);
+}
+.option-label input[type="radio"],
+.option-label input[type="checkbox"] {
+  width: 17px; height: 17px;
+  accent-color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.opt-code {
+  font-size: 10px;
+  color: var(--border);
+  min-width: 20px;
+  flex-shrink: 0;
+  padding-top: 3px;
+  font-weight: 700;
+}
+
+/* ── OTHER SPECIFY ── */
+.other-text-input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #f4f9fe;
+  display: none;
+}
+.other-text-input.show { display: block; }
+.other-text-input:focus { outline: none; border-color: var(--blue); background: var(--white); }
+
+/* ── MATRIX ── */
+.matrix-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.matrix-table { width: 100%; border-collapse: collapse; min-width: 400px; }
+.matrix-table thead th {
+  background: var(--dark);
+  color: var(--white);
+  font-size: 11px;
+  padding: 10px 6px;
+  text-align: center;
+  font-weight: 600;
+}
+.matrix-table thead th:first-child { text-align: left; padding-left: 14px; width: 42%; }
+.matrix-table tbody tr:nth-child(odd) { background: #f5f9fd; }
+.matrix-table tbody tr:hover { background: var(--accent-bg); }
+.matrix-table tbody td { padding: 11px 6px; text-align: center; border-bottom: 1px solid var(--border); font-size: 13px; }
+.matrix-table tbody td:first-child { text-align: left; padding-left: 14px; font-weight: 500; color: var(--dark); padding-right: 10px; }
+.matrix-table input[type="radio"] { width: 17px; height: 17px; accent-color: var(--blue); cursor: pointer; }
+
+/* ── OPEN END ── */
+.oe-textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 13px 14px;
+  font-size: 0.93rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #f4f9fe;
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+  transition: border-color 0.14s;
+}
+.oe-textarea:focus { outline: none; border-color: var(--blue); background: var(--white); }
+.char-count { text-align: right; font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+/* ── CONDITIONAL FOLLOW-UP ── */
+.followup-block {
+  margin-top: 18px;
+  background: var(--accent-bg);
+  border-radius: 8px;
+  border: 1.5px dashed var(--border);
+  padding: 16px 16px 12px;
+  display: none;
+}
+.followup-block.show { display: block; }
+.followup-label { font-size: 0.82rem; font-weight: 700; color: var(--blue-mid); margin-bottom: 10px; letter-spacing: 0.3px; }
+
+/* ── CONTACT SECTION ── */
+.privacy-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.privacy-note svg { color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.contact-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.contact-field input {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #f4f9fe;
+  transition: border-color 0.14s;
+}
+.contact-field input:focus { outline: none; border-color: var(--blue); background: var(--white); }
+.opt-label-tag { font-size: 10px; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); margin-left: 4px; }
+
+/* ── ERROR MESSAGE ── */
+.err-msg {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  color: #b94a00;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(185,74,0,0.07);
+  border-radius: 6px;
+  border-left: 3px solid #b94a00;
+}
+.err-msg.show { display: flex; }
+
+/* ── NAV BUTTONS ── */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  align-items: center;
+}
+.btn-back {
+  padding: 11px 18px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--muted);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.14s, color 0.14s;
+  flex-shrink: 0;
+}
+.btn-back:hover { border-color: var(--blue); color: var(--blue); }
+.btn-back:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-next {
+  flex: 1;
+  padding: 12px 24px;
+  background: var(--dark);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.14s;
+  letter-spacing: 0.2px;
+}
+.btn-next:hover { background: var(--blue-mid); }
+.btn-next:active { transform: scale(0.99); }
+
+/* ── INTRO SCREEN ── */
+.intro-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden; }
+.intro-top {
+  background: var(--dark);
+  padding: 28px 28px 24px;
+}
+.intro-survey-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.intro-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.intro-sub {
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.50);
+  font-style: italic;
+}
+.intro-body { padding: 22px 28px 24px; }
+.intro-text {
+  font-size: 0.91rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.intro-text strong { color: var(--dark); font-weight: 700; }
+.intro-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.intro-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  color: var(--blue-mid);
+  font-weight: 600;
+}
+
+/* ── END SCREENS ── */
+.end-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  padding: 52px 32px 44px;
+  overflow: hidden;
+  word-break: break-word;
+}
+.end-icon { font-size: 2.5rem; margin-bottom: 14px; }
+.end-check {
+  width: 62px; height: 62px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  flex-shrink: 0;
+}
+.end-title { font-size: 1.35rem; font-weight: 800; color: var(--dark); margin-bottom: 12px; line-height: 1.3; }
+.end-text { font-size: 0.9rem; line-height: 1.75; color: var(--muted); max-width: 420px; margin: 0 auto 8px; }
+.end-badge {
+  display: inline-block;
+  margin-top: 24px;
+  background: var(--dark);
+  color: rgba(255,255,255,0.50);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 4px;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .main { padding: 18px 14px 60px; }
+  .card-top { padding: 13px 18px 11px; }
+  .card-body { padding: 18px 18px 22px; }
+  .intro-top { padding: 22px 20px 18px; }
+  .intro-body { padding: 18px 20px 20px; }
+  .intro-title { font-size: 1.2rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .matrix-table { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+  </div>
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <div class="progress-inner">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-meta">
+        <span id="progressSection"></span>
+        <span id="progressPct"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- ── INTRO ── -->
+  <div class="screen" id="s-intro">
+    <div class="intro-card">
+      <div class="intro-top">
+        <div class="intro-survey-tag">AI Innovation Survey 2026</div>
+        <div class="intro-title">AI Innovation Excellence &amp; Engagement Survey</div>
+        <div class="intro-sub">Benchmarking AI adoption, leadership, and innovation across global organisations</div>
+      </div>
+      <div class="intro-body">
+        <p class="intro-text">
+          Artificial intelligence is reshaping how organisations compete, innovate, and operate. Yet for most leaders, the gap between ambition and tangible results remains wide. This survey is designed to cut through the noise.
+        </p>
+        <p class="intro-text">
+          <strong>Fast Company</strong>, a leading business media brand, is conducting this study — surveying C-suite executives and senior technology leaders to produce an authoritative, data-driven benchmark.
+        </p>
+
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-next" style="max-width:220px;" onclick="advance()">Begin Survey &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q1 ── -->
+  <div class="screen" id="s-q1">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section A &mdash; Screening &amp; Demographics</div>
+        <div class="q-num-label">Question 1 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What is your job title?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list" id="opts-q1">
+          <li><label class="option-label"><input type="radio" name="q1" value="01"><span class="opt-code">01</span>CEO</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="02"><span class="opt-code">02</span>President</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="03"><span class="opt-code">03</span>Chief Operating Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="04"><span class="opt-code">04</span>Chief Innovation Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="05"><span class="opt-code">05</span>Chief Technology Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="06"><span class="opt-code">06</span>Chief Digital Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="07"><span class="opt-code">07</span>Chief Marketing Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="08"><span class="opt-code">08</span>Chief Data &amp; Analytics Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q1" value="09"><span class="opt-code">09</span>Chief AI Officer</label></li>
+          <li><label class="option-label other-trigger" data-oe="q1-oe"><input type="radio" name="q1" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q1-oe" maxlength="100" placeholder="Please specify your job title...">
+        <div class="err-msg" id="err-q1">&#9888;&nbsp; Please select your job title.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()" disabled id="back-q1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q2 ── -->
+  <div class="screen" id="s-q2">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section A &mdash; Screening &amp; Demographics</div>
+        <div class="q-num-label">Question 2 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What is your organization's industry?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q2" value="01"><span class="opt-code">01</span>Technology / Software</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="02"><span class="opt-code">02</span>Financial Services / Banking / Insurance</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="03"><span class="opt-code">03</span>Healthcare / Pharmaceuticals</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="04"><span class="opt-code">04</span>Retail / Consumer Products</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="05"><span class="opt-code">05</span>Manufacturing / Industrial</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="06"><span class="opt-code">06</span>Media / Telecommunications</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="07"><span class="opt-code">07</span>Professional Services</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="08"><span class="opt-code">08</span>Energy / Utilities</label></li>
+          <li><label class="option-label"><input type="radio" name="q2" value="09"><span class="opt-code">09</span>Transportation / Logistics</label></li>
+          <li><label class="option-label other-trigger" data-oe="q2-oe"><input type="radio" name="q2" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q2-oe" maxlength="100" placeholder="Please specify your industry...">
+        <div class="err-msg" id="err-q2">&#9888;&nbsp; Please select your industry.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q3 ── -->
+  <div class="screen" id="s-q3">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section A &mdash; Screening &amp; Demographics</div>
+        <div class="q-num-label">Question 3 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Where is your organization headquartered?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q3" value="01"><span class="opt-code">01</span>United States</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="02"><span class="opt-code">02</span>Canada</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="03"><span class="opt-code">03</span>Europe</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="04"><span class="opt-code">04</span>Latin America</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="05"><span class="opt-code">05</span>Africa</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="06"><span class="opt-code">06</span>Middle East</label></li>
+          <li><label class="option-label"><input type="radio" name="q3" value="07"><span class="opt-code">07</span>Asia Pacific</label></li>
+        </ul>
+        <div class="err-msg" id="err-q3">&#9888;&nbsp; Please select your region.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q4 ── -->
+  <div class="screen" id="s-q4">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section A &mdash; Screening &amp; Demographics</div>
+        <div class="q-num-label">Question 4 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What is your organization's size by annual revenue?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q4" value="01"><span class="opt-code">01</span>Less than $50 million</label></li>
+          <li><label class="option-label"><input type="radio" name="q4" value="02"><span class="opt-code">02</span>$50 million to $500 million</label></li>
+          <li><label class="option-label"><input type="radio" name="q4" value="03"><span class="opt-code">03</span>$501 million to $1 billion</label></li>
+          <li><label class="option-label"><input type="radio" name="q4" value="04"><span class="opt-code">04</span>$1 billion to $5 billion</label></li>
+          <li><label class="option-label"><input type="radio" name="q4" value="05"><span class="opt-code">05</span>$5 billion to $10 billion</label></li>
+          <li><label class="option-label"><input type="radio" name="q4" value="06"><span class="opt-code">06</span>$10 billion or more</label></li>
+        </ul>
+        <div class="err-msg" id="err-q4">&#9888;&nbsp; Please select a revenue range.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q5 ── -->
+  <div class="screen" id="s-q5">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section A &mdash; Screening &amp; Demographics</div>
+        <div class="q-num-label">Question 5 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What best describes your organization's funding / ownership status?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q5" value="01"><span class="opt-code">01</span>Nonprofit</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="02"><span class="opt-code">02</span>Self-funded / Bootstrapped</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="03"><span class="opt-code">03</span>Seed / Series A</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="04"><span class="opt-code">04</span>Series B / C</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="05"><span class="opt-code">05</span>Series D or higher</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="06"><span class="opt-code">06</span>Private equity-backed</label></li>
+          <li><label class="option-label"><input type="radio" name="q5" value="07"><span class="opt-code">07</span>Public</label></li>
+          <li><label class="option-label other-trigger" data-oe="q5-oe"><input type="radio" name="q5" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q5-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q5">&#9888;&nbsp; Please select your ownership status.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q6 ── -->
+  <div class="screen" id="s-q6">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 6 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which AI technologies is your organization actively using in business processes or products?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q6">
+          <li><label class="option-label"><input type="checkbox" name="q6" value="01"><span class="opt-code">01</span>ChatGPT, Claude, Gemini, or equivalent LLMs</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="02"><span class="opt-code">02</span>GitHub Copilot, Cursor, or equivalent AI coding assistants</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="03"><span class="opt-code">03</span>AI-powered content creation tools (marketing, creative, communications)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="04"><span class="opt-code">04</span>AI-powered customer service / chatbots</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="05"><span class="opt-code">05</span>AI-powered data analytics and business intelligence tools</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="06"><span class="opt-code">06</span>AI agents (autonomous AI systems that execute multi-step tasks)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="07"><span class="opt-code">07</span>AI for R&amp;D / scientific discovery</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q6" value="08"><span class="opt-code">08</span>AI for supply chain / operations optimization</label></li>
+          <li><label class="option-label excl-opt" data-group="q6" data-excl="true"><input type="checkbox" name="q6" value="96"><span class="opt-code">96</span>We are not currently using any AI</label></li>
+          <li><label class="option-label other-trigger" data-oe="q6-oe"><input type="checkbox" name="q6" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q6-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q6">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q7 ── -->
+  <div class="screen" id="s-q7">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 7 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">How would you characterize your organization's current level of AI adoption and value realization?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q7" value="01"><span class="opt-code">01</span>Generating significant measurable value from AI (10%+ to EBIT or equivalent)</label></li>
+          <li><label class="option-label"><input type="radio" name="q7" value="02"><span class="opt-code">02</span>Moved beyond pilots and scaling AI with moderate returns</label></li>
+          <li><label class="option-label"><input type="radio" name="q7" value="03"><span class="opt-code">03</span>Actively piloting AI use cases but not yet scaled significantly</label></li>
+          <li><label class="option-label"><input type="radio" name="q7" value="04"><span class="opt-code">04</span>Early exploration / experimentation phase</label></li>
+          <li><label class="option-label"><input type="radio" name="q7" value="05"><span class="opt-code">05</span>Have not yet begun implementing AI initiatives</label></li>
+          <li><label class="option-label"><input type="radio" name="q7" value="06"><span class="opt-code">06</span>Tried AI but paused or stopped our initiatives</label></li>
+        </ul>
+        <div class="err-msg" id="err-q7">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q8 ── -->
+  <div class="screen" id="s-q8">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 8 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What percentage of your R&amp;D, innovation, or technology budget is allocated to AI-related initiatives?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q8" value="01"><span class="opt-code">01</span>We do not have a dedicated AI budget</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="02"><span class="opt-code">02</span>Less than 5%</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="03"><span class="opt-code">03</span>5% to 10%</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="04"><span class="opt-code">04</span>11% to 20%</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="05"><span class="opt-code">05</span>21% to 30%</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="06"><span class="opt-code">06</span>31% to 50%</label></li>
+          <li><label class="option-label"><input type="radio" name="q8" value="07"><span class="opt-code">07</span>More than 50%</label></li>
+        </ul>
+        <div class="err-msg" id="err-q8">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q9 ── -->
+  <div class="screen" id="s-q9">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 9 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Organizations are embedding AI throughout business functions. Which best describes how AI is integrated for your organization?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q9">
+          <li><label class="option-label"><input type="checkbox" name="q9" value="01"><span class="opt-code">01</span>AI accelerates our research and development work</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="02"><span class="opt-code">02</span>AI helps us identify new market opportunities or customer insights</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="03"><span class="opt-code">03</span>AI enables us to test and iterate on ideas faster</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="04"><span class="opt-code">04</span>AI is used to generate new product or service concepts</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="05"><span class="opt-code">05</span>AI helps us analyze competitive landscape and innovation trends</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="06"><span class="opt-code">06</span>AI supports innovation talent recruitment and assessment</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q9" value="07"><span class="opt-code">07</span>AI is used to evaluate and prioritize innovation projects</label></li>
+          <li><label class="option-label excl-opt" data-group="q9" data-excl="true"><input type="checkbox" name="q9" value="96"><span class="opt-code">96</span>AI is not currently integrated into our innovation processes</label></li>
+          <li><label class="option-label other-trigger" data-oe="q9-oe"><input type="checkbox" name="q9" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q9-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q9">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q10 ── -->
+  <div class="screen" id="s-q10">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 10 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which departments inside your organization are showing measurable results from AI adoption?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q10">
+          <li><label class="option-label"><input type="checkbox" name="q10" value="01"><span class="opt-code">01</span>Operations</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q10" value="02"><span class="opt-code">02</span>Finance</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q10" value="03"><span class="opt-code">03</span>Sales</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q10" value="04"><span class="opt-code">04</span>Marketing &amp; Communications</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q10" value="05"><span class="opt-code">05</span>Information Technology</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q10" value="06"><span class="opt-code">06</span>R&amp;D</label></li>
+          <li><label class="option-label other-trigger" data-oe="q10-oe"><input type="checkbox" name="q10" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q10-oe" maxlength="100" placeholder="Please specify...">
+        <div class="followup-block" id="q10a-block">
+          <div class="followup-label">Q10a. Please provide 1&ndash;2 specific examples of measurable results from AI adoption in any department:</div>
+          <textarea class="oe-textarea" id="q10a-oe" maxlength="500" rows="3" placeholder="Describe specific examples of measurable AI results..."></textarea>
+          <div class="char-count"><span id="q10a-cnt">0</span>/500 characters</div>
+        </div>
+        <div class="err-msg" id="err-q10">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q11 ── -->
+  <div class="screen" id="s-q11">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 11 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Who is most responsible for driving AI strategy and innovation at your organization?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q11" value="01"><span class="opt-code">01</span>CEO</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="02"><span class="opt-code">02</span>Chief Technology Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="03"><span class="opt-code">03</span>Chief Information Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="04"><span class="opt-code">04</span>Chief Digital Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="05"><span class="opt-code">05</span>Chief AI Officer / Chief Data &amp; Analytics Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="06"><span class="opt-code">06</span>Chief Innovation Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="07"><span class="opt-code">07</span>Chief Operating Officer</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="08"><span class="opt-code">08</span>A cross-functional AI committee or council</label></li>
+          <li><label class="option-label"><input type="radio" name="q11" value="96"><span class="opt-code">96</span>No clear owner has been designated</label></li>
+          <li><label class="option-label other-trigger" data-oe="q11-oe"><input type="radio" name="q11" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q11-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q11">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q12 ── -->
+  <div class="screen" id="s-q12">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 12 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What are the most significant barriers preventing your organization from scaling AI and realizing greater value?</div>
+        <div class="q-instr">Select up to 3</div>
+        <ul class="options-list" id="opts-q12">
+          <li><label class="option-label"><input type="checkbox" name="q12" value="01"><span class="opt-code">01</span>Lack of clear ROI or business case</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="02"><span class="opt-code">02</span>Insufficient AI talent or skills within the organization</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="03"><span class="opt-code">03</span>Insufficient external partner / vendor ecosystem</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="04"><span class="opt-code">04</span>Data quality, governance, or infrastructure limitations</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="05"><span class="opt-code">05</span>Technology or technical infrastructure constraints</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="06"><span class="opt-code">06</span>Organizational resistance to change</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="07"><span class="opt-code">07</span>Budget or resource constraints</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="08"><span class="opt-code">08</span>Regulatory, compliance, or risk concerns</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="09"><span class="opt-code">09</span>Difficulty integrating AI into existing workflows and processes</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q12" value="10"><span class="opt-code">10</span>Leadership lacks understanding of AI capabilities</label></li>
+          <li><label class="option-label excl-opt" data-group="q12" data-excl="true"><input type="checkbox" name="q12" value="96"><span class="opt-code">96</span>We do not face significant barriers</label></li>
+          <li><label class="option-label other-trigger" data-oe="q12-oe"><input type="checkbox" name="q12" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q12-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q12">&#9888;&nbsp; Please select up to 3 options.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q13 ── -->
+  <div class="screen" id="s-q13">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 13 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">How does your organization measure success and ROI from AI initiatives?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q13">
+          <li><label class="option-label"><input type="checkbox" name="q13" value="01"><span class="opt-code">01</span>Revenue growth from AI-enabled products or services (YOY revenue growth)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="02"><span class="opt-code">02</span>Cost reduction or operational efficiency gains (lower operational or overhead costs)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="03"><span class="opt-code">03</span>Productivity improvements (time saved, faster processes)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="04"><span class="opt-code">04</span>Customer satisfaction or engagement metrics (net promoter score)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="05"><span class="opt-code">05</span>Innovation velocity (speed to market, number of new innovations)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="06"><span class="opt-code">06</span>Competitive advantage or market share gains (product differentiation or customization)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q13" value="07"><span class="opt-code">07</span>Employee satisfaction or retention (new hires; tenure)</label></li>
+          <li><label class="option-label excl-opt" data-group="q13" data-excl="true"><input type="checkbox" name="q13" value="96"><span class="opt-code">96</span>We have not yet established clear AI success metrics</label></li>
+          <li><label class="option-label other-trigger" data-oe="q13-oe"><input type="checkbox" name="q13" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q13-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q13">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q14 ── -->
+  <div class="screen" id="s-q14">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section B &mdash; AI Adoption &amp; Maturity</div>
+        <div class="q-num-label">Question 14 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">In your innovation ecosystem, which external partners or institutions are you collaborating with on AI initiatives?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q14">
+          <li><label class="option-label"><input type="checkbox" name="q14" value="01"><span class="opt-code">01</span>Hyperscalers (Microsoft, Google, Amazon)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="02"><span class="opt-code">02</span>Frontier models (OpenAI, Anthropic, etc.)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="03"><span class="opt-code">03</span>AI-focused startups</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="04"><span class="opt-code">04</span>Universities or research institutions</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="05"><span class="opt-code">05</span>Consulting firms (TATA Consultancy Services, McKinsey, BCG, Accenture, Deloitte, etc.)</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="06"><span class="opt-code">06</span>Industry consortiums or cross-industry AI collaboratives</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="07"><span class="opt-code">07</span>Accelerators or incubators focused on AI</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q14" value="08"><span class="opt-code">08</span>Government agencies or research labs</label></li>
+          <li><label class="option-label excl-opt" data-group="q14" data-excl="true"><input type="checkbox" name="q14" value="96"><span class="opt-code">96</span>We are not currently collaborating with external partners on AI</label></li>
+          <li><label class="option-label other-trigger" data-oe="q14-oe"><input type="checkbox" name="q14" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q14-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q14">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q15 ── -->
+  <div class="screen" id="s-q15">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section C &mdash; Competitive Positioning &amp; AI Investment</div>
+        <div class="q-num-label">Question 15 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Compared to your competitors, how many years ahead or behind do you believe your organization is in AI adoption and maturity?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q15" value="01"><span class="opt-code">01</span>We are 3+ years ahead of our competitors</label></li>
+          <li><label class="option-label"><input type="radio" name="q15" value="02"><span class="opt-code">02</span>We are 1&ndash;2 years ahead of our competitors</label></li>
+          <li><label class="option-label"><input type="radio" name="q15" value="03"><span class="opt-code">03</span>We are roughly at the same level as our competitors</label></li>
+          <li><label class="option-label"><input type="radio" name="q15" value="04"><span class="opt-code">04</span>We are 1&ndash;2 years behind our competitors</label></li>
+          <li><label class="option-label"><input type="radio" name="q15" value="05"><span class="opt-code">05</span>We are 3+ years behind our competitors</label></li>
+          <li><label class="option-label"><input type="radio" name="q15" value="99"><span class="opt-code">99</span>Unable to assess / Not sure</label></li>
+        </ul>
+        <div class="err-msg" id="err-q15">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q16 ── -->
+  <div class="screen" id="s-q16">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section C &mdash; Competitive Positioning &amp; AI Investment</div>
+        <div class="q-num-label">Question 16 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which statement best describes how your organization views the relationship between AI and innovation?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q16" value="01"><span class="opt-code">01</span>AI is central to our innovation strategy &ndash; we cannot innovate effectively without it</label></li>
+          <li><label class="option-label"><input type="radio" name="q16" value="02"><span class="opt-code">02</span>AI is an important enabler of innovation but not the only driver</label></li>
+          <li><label class="option-label"><input type="radio" name="q16" value="03"><span class="opt-code">03</span>AI is one of several technologies we are exploring for innovation</label></li>
+          <li><label class="option-label"><input type="radio" name="q16" value="04"><span class="opt-code">04</span>AI is primarily a productivity / efficiency tool, not core to innovation</label></li>
+          <li><label class="option-label"><input type="radio" name="q16" value="05"><span class="opt-code">05</span>We have not yet connected our AI and innovation strategies</label></li>
+          <li><label class="option-label other-trigger" data-oe="q16-oe"><input type="radio" name="q16" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q16-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q16">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q17 ── -->
+  <div class="screen" id="s-q17">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section C &mdash; Competitive Positioning &amp; AI Investment</div>
+        <div class="q-num-label">Question 17 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Looking ahead to the next 12&ndash;18 months, how do you expect your organization's AI investments to change?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q17" value="01"><span class="opt-code">01</span>Significantly increase (more than 25% growth)</label></li>
+          <li><label class="option-label"><input type="radio" name="q17" value="02"><span class="opt-code">02</span>Moderately increase (11&ndash;25% growth)</label></li>
+          <li><label class="option-label"><input type="radio" name="q17" value="03"><span class="opt-code">03</span>Slight increase (1&ndash;10% growth)</label></li>
+          <li><label class="option-label"><input type="radio" name="q17" value="04"><span class="opt-code">04</span>Remain roughly the same</label></li>
+          <li><label class="option-label"><input type="radio" name="q17" value="05"><span class="opt-code">05</span>Decrease</label></li>
+          <li><label class="option-label"><input type="radio" name="q17" value="99"><span class="opt-code">99</span>Not sure</label></li>
+        </ul>
+        <div class="err-msg" id="err-q17">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q18 ── -->
+  <div class="screen" id="s-q18">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section C &mdash; Competitive Positioning &amp; AI Investment</div>
+        <div class="q-num-label">Question 18 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What percentage of your workforce currently has access to generative AI tools for their work?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q18" value="01"><span class="opt-code">01</span>0% &ndash; No employees have access</label></li>
+          <li><label class="option-label"><input type="radio" name="q18" value="02"><span class="opt-code">02</span>1&ndash;25% &ndash; Select teams or individuals only</label></li>
+          <li><label class="option-label"><input type="radio" name="q18" value="03"><span class="opt-code">03</span>26&ndash;50% &ndash; Roughly half of employees</label></li>
+          <li><label class="option-label"><input type="radio" name="q18" value="04"><span class="opt-code">04</span>51&ndash;75% &ndash; Majority of employees</label></li>
+          <li><label class="option-label"><input type="radio" name="q18" value="05"><span class="opt-code">05</span>76&ndash;100% &ndash; Nearly all or all employees</label></li>
+          <li><label class="option-label"><input type="radio" name="q18" value="99"><span class="opt-code">99</span>Not sure</label></li>
+        </ul>
+        <div class="err-msg" id="err-q18">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q19 ── -->
+  <div class="screen" id="s-q19">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section D &mdash; Leadership, Culture &amp; Workforce</div>
+        <div class="q-num-label">Question 19 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">How would you rate your C-suite's overall understanding and alignment on AI strategy and priorities?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q19" value="01"><span class="opt-code">01</span>Excellent &ndash; Strong understanding and complete alignment across the C-suite</label></li>
+          <li><label class="option-label"><input type="radio" name="q19" value="02"><span class="opt-code">02</span>Good &ndash; Generally strong understanding with mostly aligned priorities</label></li>
+          <li><label class="option-label"><input type="radio" name="q19" value="03"><span class="opt-code">03</span>Fair &ndash; Some gaps in understanding and partial alignment</label></li>
+          <li><label class="option-label"><input type="radio" name="q19" value="04"><span class="opt-code">04</span>Poor &ndash; Significant gaps in understanding and misalignment</label></li>
+          <li><label class="option-label"><input type="radio" name="q19" value="05"><span class="opt-code">05</span>Very Poor &ndash; Little understanding and no alignment</label></li>
+          <li><label class="option-label"><input type="radio" name="q19" value="99"><span class="opt-code">99</span>Not sure</label></li>
+        </ul>
+        <div class="err-msg" id="err-q19">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q20 MATRIX ── -->
+  <div class="screen" id="s-q20">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section D &mdash; Leadership, Culture &amp; Workforce</div>
+        <div class="q-num-label">Question 20 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Please indicate your level of agreement with each of the following statements about AI at your organization.</div>
+        <div class="q-instr">1 = Fully agree &nbsp;&bull;&nbsp; 5 = Do not agree at all</div>
+        <div class="matrix-wrap">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Statement</th>
+                <th>1<br><small>Fully agree</small></th>
+                <th>2<br><small>Mostly agree</small></th>
+                <th>3<br><small>Neutral</small></th>
+                <th>4<br><small>Mostly disagree</small></th>
+                <th>5<br><small>Do not agree</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Our workforce is successfully adopting AI tools</td><td><input type="radio" name="q20_1" value="1"></td><td><input type="radio" name="q20_1" value="2"></td><td><input type="radio" name="q20_1" value="3"></td><td><input type="radio" name="q20_1" value="4"></td><td><input type="radio" name="q20_1" value="5"></td></tr>
+              <tr><td>Our partner / vendor ecosystem is key to our success with AI innovation</td><td><input type="radio" name="q20_2" value="1"></td><td><input type="radio" name="q20_2" value="2"></td><td><input type="radio" name="q20_2" value="3"></td><td><input type="radio" name="q20_2" value="4"></td><td><input type="radio" name="q20_2" value="5"></td></tr>
+              <tr><td>Further investment in AI depends on our ability to demonstrate ROI</td><td><input type="radio" name="q20_3" value="1"></td><td><input type="radio" name="q20_3" value="2"></td><td><input type="radio" name="q20_3" value="3"></td><td><input type="radio" name="q20_3" value="4"></td><td><input type="radio" name="q20_3" value="5"></td></tr>
+              <tr><td>The future of our company depends on the success of AI innovation</td><td><input type="radio" name="q20_4" value="1"></td><td><input type="radio" name="q20_4" value="2"></td><td><input type="radio" name="q20_4" value="3"></td><td><input type="radio" name="q20_4" value="4"></td><td><input type="radio" name="q20_4" value="5"></td></tr>
+              <tr><td>We are confident about the direction of our AI innovation</td><td><input type="radio" name="q20_5" value="1"></td><td><input type="radio" name="q20_5" value="2"></td><td><input type="radio" name="q20_5" value="3"></td><td><input type="radio" name="q20_5" value="4"></td><td><input type="radio" name="q20_5" value="5"></td></tr>
+              <tr><td>We are keeping up with new AI technologies as they emerge</td><td><input type="radio" name="q20_6" value="1"></td><td><input type="radio" name="q20_6" value="2"></td><td><input type="radio" name="q20_6" value="3"></td><td><input type="radio" name="q20_6" value="4"></td><td><input type="radio" name="q20_6" value="5"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="err-msg" id="err-q20">&#9888;&nbsp; Please rate all 6 statements.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q21 ── -->
+  <div class="screen" id="s-q21">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section E &mdash; Production Deployment &amp; Responsible AI</div>
+        <div class="q-num-label">Question 21 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which statement best describes your organization's current state of deploying AI into production at scale?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q21" value="01"><span class="opt-code">01</span>Multiple AI systems in production that are mission-critical and used broadly</label></li>
+          <li><label class="option-label"><input type="radio" name="q21" value="02"><span class="opt-code">02</span>At least one AI solution in production and actively expanding to more use cases</label></li>
+          <li><label class="option-label"><input type="radio" name="q21" value="03"><span class="opt-code">03</span>Production pilots (limited rollout to one business unit or region), not enterprise scale</label></li>
+          <li><label class="option-label"><input type="radio" name="q21" value="04"><span class="opt-code">04</span>Attempted production deployment but rolled back due to performance, risk, or adoption issues</label></li>
+          <li><label class="option-label"><input type="radio" name="q21" value="05"><span class="opt-code">05</span>Mostly in proof-of-concept / prototype stage</label></li>
+          <li><label class="option-label"><input type="radio" name="q21" value="99"><span class="opt-code">99</span>Not sure / Not applicable</label></li>
+        </ul>
+        <div class="err-msg" id="err-q21">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q22 ── -->
+  <div class="screen" id="s-q22">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section E &mdash; Production Deployment &amp; Responsible AI</div>
+        <div class="q-num-label">Question 22 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which Responsible AI guardrails are currently in place for AI systems in your organization?</div>
+        <div class="q-instr">Select all that apply</div>
+        <ul class="options-list" id="opts-q22">
+          <li><label class="option-label"><input type="checkbox" name="q22" value="01"><span class="opt-code">01</span>AI governance policy / standards</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="02"><span class="opt-code">02</span>Security &amp; privacy controls</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="03"><span class="opt-code">03</span>Model risk management</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="04"><span class="opt-code">04</span>Human-in-the-loop controls for high-impact decisions</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="05"><span class="opt-code">05</span>Auditability &amp; traceability</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="06"><span class="opt-code">06</span>Content safety controls</label></li>
+          <li><label class="option-label"><input type="checkbox" name="q22" value="07"><span class="opt-code">07</span>Third-party / vendor risk reviews for AI tools and foundation models</label></li>
+          <li><label class="option-label excl-opt" data-group="q22" data-excl="true"><input type="checkbox" name="q22" value="96"><span class="opt-code">96</span>We do not yet have formal Responsible AI guardrails</label></li>
+          <li><label class="option-label other-trigger" data-oe="q22-oe"><input type="checkbox" name="q22" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q22-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q22">&#9888;&nbsp; Please select at least one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q23 ── -->
+  <div class="screen" id="s-q23">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section E &mdash; Production Deployment &amp; Responsible AI</div>
+        <div class="q-num-label">Question 23 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Which model best describes how your workforce collaborates with AI today?</div>
+        <div class="q-instr">Select one only</div>
+        <ul class="options-list">
+          <li><label class="option-label"><input type="radio" name="q23" value="01"><span class="opt-code">01</span>AI as a personal assistant (individual productivity use)</label></li>
+          <li><label class="option-label"><input type="radio" name="q23" value="02"><span class="opt-code">02</span>AI as a co-pilot in workflows (AI assists humans in task execution)</label></li>
+          <li><label class="option-label"><input type="radio" name="q23" value="03"><span class="opt-code">03</span>Human + AI teams (defined roles where humans supervise, manage exceptions, and improve AI)</label></li>
+          <li><label class="option-label"><input type="radio" name="q23" value="04"><span class="opt-code">04</span>Autonomous AI (AI executes most steps; humans intervene only for exceptions or compliance)</label></li>
+          <li><label class="option-label"><input type="radio" name="q23" value="96"><span class="opt-code">96</span>We do not have a defined Human + AI collaboration model yet</label></li>
+          <li><label class="option-label other-trigger" data-oe="q23-oe"><input type="radio" name="q23" value="98"><span class="opt-code">98</span>Other &ndash; please specify</label></li>
+        </ul>
+        <input type="text" class="other-text-input" id="q23-oe" maxlength="100" placeholder="Please specify...">
+        <div class="err-msg" id="err-q23">&#9888;&nbsp; Please select one option.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q24 ── -->
+  <div class="screen" id="s-q24">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section F &mdash; Open-End &amp; Contact Details</div>
+        <div class="q-num-label">Question 24 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">What is the single most important outcome you hope to achieve from AI over the next 2&ndash;3 years?</div>
+        <div class="q-instr">Maximum 300 characters. Required.</div>
+        <textarea class="oe-textarea" id="q24-oe" maxlength="300" rows="5" placeholder="Please enter your answer here..."></textarea>
+        <div class="char-count"><span id="q24-cnt">0</span>/300 characters</div>
+        <div class="err-msg" id="err-q24">&#9888;&nbsp; Please enter your response.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="advance()">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── Q25 CONTACT ── -->
+  <div class="screen" id="s-q25">
+    <div class="card">
+      <div class="card-top">
+        <div class="section-tag">Section F &mdash; Open-End &amp; Contact Details</div>
+        <div class="q-num-label">Question 25 of 25</div>
+      </div>
+      <div class="card-body">
+        <div class="q-text">Contact Details <span style="font-size:0.78rem;font-weight:400;color:var(--muted);">&mdash; Optional</span></div>
+        <div class="privacy-note">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Your participation is <strong>anonymous</strong>. If you are willing to be contacted by Fast Company, you may optionally provide your details below. All fields optional.
+        </div>
+        <div class="contact-grid">
+          <div class="contact-field"><label>Full Name <span class="opt-label-tag">optional</span></label><input type="text" id="q25_name" name="q25_name" placeholder="Your full name"></div>
+          <div class="contact-field"><label>Job Title <span class="opt-label-tag">optional</span></label><input type="text" id="q25_title" name="q25_title" placeholder="Your job title"></div>
+          <div class="contact-field"><label>Organization <span class="opt-label-tag">optional</span></label><input type="text" id="q25_org" name="q25_org" placeholder="Organization name"></div>
+          <div class="contact-field"><label>Email Address <span class="opt-label-tag">optional</span></label><input type="email" id="q25_email" name="q25_email" placeholder="your@email.com"></div>
+          <div class="contact-field" style="grid-column:1/-1"><label>Phone Number <span class="opt-label-tag">optional</span></label><input type="tel" id="q25_phone" name="q25_phone" placeholder="+1 (555) 000-0000"></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+      <button class="btn-next" onclick="submitSurvey()" style="background:var(--blue-mid);" id="btn-submit">Submit Survey &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ── DISQUALIFIED ── -->
+  <div class="screen" id="s-disq">
+    <div class="end-card">
+      <div style="width:62px;height:62px;background:#c8dff0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5a7a94" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+      <div class="end-title">Thank You for Your Interest</div>
+      <p class="end-text">This survey is currently open to a select group of senior executives as part of a targeted research programme. We appreciate you taking the time.</p>
+      <div class="end-badge">Fast Company &middot; 2026</div>
+    </div>
+  </div>
+
+  <!-- ── THANK YOU ── -->
+  <div class="screen" id="s-complete">
+    <div class="end-card">
+      <div class="end-check">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="end-title">Thank You for Participating</div>
+      <p class="end-text">Your insights will help benchmark AI adoption and innovation practices across industries. Fast Company appreciates your contribution to this landmark study.</p>
+      <div class="end-badge">Fast Company &middot; 2026</div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ── SCREEN ORDER ──
+const SCREENS = [
+  's-intro',
+  's-q1','s-q2','s-q3','s-q4','s-q5',
+  's-q6','s-q7','s-q8','s-q9','s-q10',
+  's-q11','s-q12','s-q13','s-q14',
+  's-q15','s-q16','s-q17','s-q18',
+  's-q19','s-q20',
+  's-q21','s-q22','s-q23',
+  's-q24','s-q25',
+  's-disq','s-complete'
+];
+const TOTAL_Q = 25;
+let history = ['s-intro'];
+
+function currentId() { return history[history.length - 1]; }
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  const idx = SCREENS.indexOf(id);
+  const isIntro = id === 's-intro';
+  const isComplete = id === 's-complete' || id === 's-disq';
+  const pWrap = document.getElementById('progressWrap');
+  if (isIntro || isComplete) {
+    pWrap.style.display = 'none';
+  } else {
+    pWrap.style.display = 'block';
+    const qNum = idx - 1; // 1-25
+    const pct = Math.round((qNum / TOTAL_Q) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    // Section label
+    const sectionNames = {
+      1:'Section A',2:'Section A',3:'Section A',4:'Section A',5:'Section A',
+      6:'Section B',7:'Section B',8:'Section B',9:'Section B',10:'Section B',
+      11:'Section B',12:'Section B',13:'Section B',14:'Section B',
+      15:'Section C',16:'Section C',17:'Section C',18:'Section C',
+      19:'Section D',20:'Section D',
+      21:'Section E',22:'Section E',23:'Section E',
+      24:'Section F',25:'Section F'
+    };
+    document.getElementById('progressSection').textContent = sectionNames[qNum] || '';
+    document.getElementById('progressPct').textContent = qNum + ' of ' + TOTAL_Q + ' questions';
+  }
+}
+
+function goBack() {
+  if (history.length > 1) {
+    history.pop();
+    showScreen(currentId());
+  }
+}
+
+// ── VALIDATION ──
+function validate(id) {
+  if (id === 's-intro' || id === 's-q25' || id === 's-complete') return true;
+
+  // Single punch
+  const singleMap = {
+    's-q1':'q1','s-q2':'q2','s-q3':'q3','s-q4':'q4','s-q5':'q5',
+    's-q7':'q7','s-q8':'q8','s-q11':'q11',
+    's-q15':'q15','s-q16':'q16','s-q17':'q17','s-q18':'q18',
+    's-q19':'q19','s-q21':'q21','s-q23':'q23'
+  };
+  if (singleMap[id]) {
+    const name = singleMap[id];
+    const ok = !!document.querySelector(`input[name="${name}"]:checked`);
+    const err = document.getElementById('err-' + name);
+    err.classList.toggle('show', !ok);
+    return ok;
+  }
+
+  // Multi punch
+  const multiMap = {
+    's-q6':'q6','s-q9':'q9','s-q10':'q10',
+    's-q12':'q12','s-q13':'q13','s-q14':'q14','s-q22':'q22'
+  };
+  if (multiMap[id]) {
+    const name = multiMap[id];
+    const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+    const err = document.getElementById('err-' + name);
+    if (checked.length === 0) {
+      err.textContent = '⚠ Please select at least one option.';
+      err.classList.add('show');
+      return false;
+    }
+    err.classList.remove('show');
+    return true;
+  }
+
+  // Matrix Q20
+  if (id === 's-q20') {
+    const rows = ['q20_1','q20_2','q20_3','q20_4','q20_5','q20_6'];
+    const ok = rows.every(r => !!document.querySelector(`input[name="${r}"]:checked`));
+    document.getElementById('err-q20').classList.toggle('show', !ok);
+    return ok;
+  }
+
+  // Open end Q24
+  if (id === 's-q24') {
+    const ok = document.getElementById('q24-oe').value.trim().length > 0;
+    document.getElementById('err-q24').classList.toggle('show', !ok);
+    return ok;
+  }
+
+  return true;
+}
+
+// ── SILENT SCREENING RULES ──
+// Q1: only C-suite qualify (values 01-09 — all pass; 98=Other — disqualify)
+// Q4: no revenue screen — all revenue bands qualify
+function checkScreening(screenId) {
+  if (screenId === 's-q1') {
+    const val = document.querySelector('input[name="q1"]:checked')?.value;
+    // Allow C-suite codes 01-09 only. Code 98 (Other) does not qualify.
+    const allowed = ['01','02','03','04','05','06','07','08','09'];
+    if (val && !allowed.includes(val)) return 's-disq';
+  }
+  return null;
+}
+
+function advance() {
+  const cur = currentId();
+  if (!validate(cur)) return;
+  // Check silent screening
+  const disq = checkScreening(cur);
+  if (disq) {
+    history.push('s-disq');
+    showScreen('s-disq');
+    return;
+  }
+  const idx = SCREENS.indexOf(cur);
+  if (idx < SCREENS.length - 1) {
+    const next = SCREENS[idx + 1];
+    history.push(next);
+    showScreen(next);
+  }
+}
+
+// ── OPTION VISUAL STATE ──
+document.addEventListener('change', e => {
+  const inp = e.target;
+  if (!inp.matches('input[type="radio"], input[type="checkbox"]')) return;
+
+  if (inp.type === 'radio') {
+    document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+      r.closest('.option-label').classList.toggle('selected', r.checked);
+    });
+  } else {
+    inp.closest('.option-label').classList.toggle('selected', inp.checked);
+  }
+
+  // Clear error
+  const sc = inp.closest('.screen');
+  if (sc) {
+    const err = sc.querySelector('.err-msg.show');
+    if (err) err.classList.remove('show');
+  }
+});
+
+// ── EXCLUSIVE CHECKBOXES (code 96) ──
+document.querySelectorAll('.excl-opt').forEach(label => {
+  const inp = label.querySelector('input');
+  const name = inp.name;
+  inp.addEventListener('change', () => {
+    if (inp.checked) {
+      document.querySelectorAll(`input[name="${name}"]`).forEach(cb => {
+        if (cb !== inp) {
+          cb.checked = false;
+          cb.closest('.option-label').classList.remove('selected');
+        }
+      });
+    }
+  });
+});
+document.addEventListener('change', e => {
+  const inp = e.target;
+  if (!inp.matches('input[type="checkbox"]')) return;
+  const excl = document.querySelector(`.excl-opt input[name="${inp.name}"]`);
+  if (excl && excl !== inp && inp.checked) {
+    excl.checked = false;
+    excl.closest('.option-label').classList.remove('selected');
+  }
+});
+
+// ── Q12 MAX 3 ──
+document.querySelectorAll('input[name="q12"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const checked = document.querySelectorAll('input[name="q12"]:checked');
+    if (checked.length > 3) {
+      cb.checked = false;
+      cb.closest('.option-label').classList.remove('selected');
+      const err = document.getElementById('err-q12');
+      err.textContent = '⚠ Maximum 3 selections allowed.';
+      err.classList.add('show');
+    }
+  });
+});
+
+// ── OTHER SPECIFY ──
+document.querySelectorAll('.other-trigger').forEach(label => {
+  const inp = label.querySelector('input');
+  const oeId = label.dataset.oe;
+  if (!oeId) return;
+  inp.addEventListener('change', () => {
+    const oe = document.getElementById(oeId);
+    if (oe) {
+      oe.classList.toggle('show', inp.checked);
+      if (inp.checked) setTimeout(() => oe.focus(), 60);
+    }
+  });
+});
+
+// ── Q10 CONDITIONAL FOLLOW-UP ──
+document.querySelectorAll('input[name="q10"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const any = document.querySelectorAll('input[name="q10"]:checked').length > 0;
+    document.getElementById('q10a-block').classList.toggle('show', any);
+  });
+});
+
+// ── CHAR COUNTERS ──
+const q24oe = document.getElementById('q24-oe');
+if (q24oe) q24oe.addEventListener('input', () => {
+  document.getElementById('q24-cnt').textContent = q24oe.value.length;
+});
+const q10aoe = document.getElementById('q10a-oe');
+if (q10aoe) q10aoe.addEventListener('input', () => {
+  document.getElementById('q10a-cnt').textContent = q10aoe.value.length;
+});
+
+// ── APPS SCRIPT URL ──
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyznsKUxBe-RHz253c5AeOF2xarRGO1GmPIlvbnlih-Ni_7yW0bPoTL5SFq5ynAiX7r/exec';
+// ── LABEL LOOKUP MAPS — synced exactly to HTML option text ──
+const LABELS = {
+  q1:  {
+    '01':'CEO','02':'President','03':'Chief Operating Officer',
+    '04':'Chief Innovation Officer','05':'Chief Technology Officer',
+    '06':'Chief Digital Officer','07':'Chief Marketing Officer',
+    '08':'Chief Data & Analytics Officer','09':'Chief AI Officer','98':'Other'
+  },
+  q2:  {
+    '01':'Technology / Software','02':'Financial Services / Banking / Insurance',
+    '03':'Healthcare / Pharmaceuticals','04':'Retail / Consumer Products',
+    '05':'Manufacturing / Industrial','06':'Media / Telecommunications',
+    '07':'Professional Services','08':'Energy / Utilities',
+    '09':'Transportation / Logistics','98':'Other'
+  },
+  q3:  {
+    '01':'United States','02':'Canada','03':'Europe','04':'Latin America',
+    '05':'Africa','06':'Middle East','07':'Asia Pacific'
+  },
+  q4:  {
+    '01':'Less than $50 million','02':'$50 million to $500 million',
+    '03':'$501 million to $999.9 million','04':'$1 billion to $5 billion',
+    '05':'$5 billion to $10 billion','06':'$10 billion or more'
+  },
+  q5:  {
+    '01':'Nonprofit','02':'Self-funded / Bootstrapped','03':'Seed / Series A',
+    '04':'Series B / C','05':'Series D or higher','06':'Private equity-backed',
+    '07':'Public','98':'Other'
+  },
+  q6:  {
+    '01':'ChatGPT, Claude, Gemini, or equivalent LLMs',
+    '02':'GitHub Copilot, Cursor, or equivalent AI coding assistants',
+    '03':'AI-powered content creation tools (marketing, creative, communications)',
+    '04':'AI-powered customer service / chatbots',
+    '05':'AI-powered data analytics and business intelligence tools',
+    '06':'AI agents (autonomous AI systems that execute multi-step tasks)',
+    '07':'AI for R&D / scientific discovery',
+    '08':'AI for supply chain / operations optimization',
+    '96':'We are not currently using any AI','98':'Other'
+  },
+  q7:  {
+    '01':'Generating significant measurable value from AI (10%+ to EBIT or equivalent)',
+    '02':'Moved beyond pilots and scaling AI with moderate returns',
+    '03':'Actively piloting AI use cases but not yet scaled significantly',
+    '04':'Early exploration / experimentation phase',
+    '05':'Have not yet begun implementing AI initiatives',
+    '06':'Tried AI but paused or stopped our initiatives'
+  },
+  q8:  {
+    '01':'We do not have a dedicated AI budget','02':'Less than 5%',
+    '03':'5% to 10%','04':'11% to 20%','05':'21% to 30%',
+    '06':'31% to 50%','07':'More than 50%'
+  },
+  q9:  {
+    '01':'AI accelerates our research and development work',
+    '02':'AI helps us identify new market opportunities or customer insights',
+    '03':'AI enables us to test and iterate on ideas faster',
+    '04':'AI is used to generate new product or service concepts',
+    '05':'AI helps us analyze competitive landscape and innovation trends',
+    '06':'AI supports innovation talent recruitment and assessment',
+    '07':'AI is used to evaluate and prioritize innovation projects',
+    '96':'AI is not currently integrated','98':'Other'
+  },
+  q10: {
+    '01':'Operations','02':'Finance','03':'Sales',
+    '04':'Marketing & Communications','05':'Information Technology',
+    '06':'R&D','98':'Other'
+  },
+  q11: {
+    '01':'CEO','02':'Chief Technology Officer','03':'Chief Information Officer',
+    '04':'Chief Digital Officer','05':'Chief AI Officer / Chief Data & Analytics Officer',
+    '06':'Chief Innovation Officer','07':'Chief Operating Officer',
+    '08':'A cross-functional AI committee or council',
+    '96':'No clear owner has been designated','98':'Other'
+  },
+  q12: {
+    '01':'Lack of clear ROI or business case',
+    '02':'Insufficient AI talent or skills within the organization',
+    '03':'Insufficient external partner / vendor ecosystem',
+    '04':'Data quality, governance, or infrastructure limitations',
+    '05':'Technology or technical infrastructure constraints',
+    '06':'Organizational resistance to change',
+    '07':'Budget or resource constraints',
+    '08':'Regulatory, compliance, or risk concerns',
+    '09':'Difficulty integrating AI into existing workflows and processes',
+    '10':'Leadership lacks understanding of AI capabilities',
+    '96':'We do not face significant barriers','98':'Other'
+  },
+  q13: {
+    '01':'Revenue growth from AI-enabled products or services (YOY revenue growth)',
+    '02':'Cost reduction or operational efficiency gains (lower operational or overhead costs)',
+    '03':'Productivity improvements (time saved, faster processes)',
+    '04':'Customer satisfaction or engagement metrics (net promoter score)',
+    '05':'Innovation velocity (speed to market, number of new innovations)',
+    '06':'Competitive advantage or market share gains (product differentiation or customization)',
+    '07':'Employee satisfaction or retention (new hires; tenure)',
+    '96':'We have not yet established clear AI success metrics','98':'Other'
+  },
+  q14: {
+    '01':'Hyperscalers (Microsoft, Google, Amazon)',
+    '02':'Frontier models (OpenAI, Anthropic, etc.)',
+    '03':'AI-focused startups',
+    '04':'Universities or research institutions',
+    '05':'Consulting firms (TATA Consultancy Services, McKinsey, BCG, Accenture, Deloitte, etc.)',
+    '06':'Industry consortiums or cross-industry AI collaboratives',
+    '07':'Accelerators or incubators focused on AI',
+    '08':'Government agencies or research labs',
+    '96':'We are not currently collaborating with external partners on AI','98':'Other'
+  },
+  q15: {
+    '01':'We are 3+ years ahead of our competitors',
+    '02':'We are 1-2 years ahead of our competitors',
+    '03':'We are roughly at the same level as our competitors',
+    '04':'We are 1-2 years behind our competitors',
+    '05':'We are 3+ years behind our competitors',
+    '99':'Unable to assess / Not sure'
+  },
+  q16: {
+    '01':'AI is central to our innovation strategy - we cannot innovate effectively without it',
+    '02':'AI is an important enabler of innovation but not the only driver',
+    '03':'AI is one of several technologies we are exploring for innovation',
+    '04':'AI is primarily a productivity / efficiency tool, not core to innovation',
+    '05':'We have not yet connected our AI and innovation strategies','98':'Other'
+  },
+  q17: {
+    '01':'Significantly increase (more than 25% growth)',
+    '02':'Moderately increase (11-25% growth)',
+    '03':'Slight increase (1-10% growth)',
+    '04':'Remain roughly the same','05':'Decrease','99':'Not sure'
+  },
+  q18: {
+    '01':'0% - No employees have access',
+    '02':'1-25% - Select teams or individuals only',
+    '03':'26-50% - Roughly half of employees',
+    '04':'51-75% - Majority of employees',
+    '05':'76-100% - Nearly all or all employees','99':'Not sure'
+  },
+  q19: {
+    '01':'Excellent - Strong understanding and complete alignment across the C-suite',
+    '02':'Good - Generally strong understanding with mostly aligned priorities',
+    '03':'Fair - Some gaps in understanding and partial alignment',
+    '04':'Poor - Significant gaps in understanding and misalignment',
+    '05':'Very Poor - Little understanding and no alignment','99':'Not sure'
+  },
+  q20: {
+    '1':'Significantly ahead','2':'Somewhat ahead','3':'About the same',
+    '4':'Somewhat behind','5':'Significantly behind'
+  },
+  q21: {
+    '01':'Multiple AI systems in production that are mission-critical and used broadly',
+    '02':'At least one AI solution in production and actively expanding to more use cases',
+    '03':'Production pilots (limited rollout to one business unit or region), not enterprise scale',
+    '04':'Attempted production deployment but rolled back due to performance, risk, or adoption issues',
+    '05':'Mostly in proof-of-concept / prototype stage','99':'Not sure / Not applicable'
+  },
+  q22: {
+    '01':'AI governance policy / standards',
+    '02':'Security & privacy controls',
+    '03':'Model risk management',
+    '04':'Human-in-the-loop controls for high-impact decisions',
+    '05':'Auditability & traceability',
+    '06':'Content safety controls',
+    '07':'Third-party / vendor risk reviews for AI tools and foundation models',
+    '96':'We do not yet have formal Responsible AI guardrails','98':'Other'
+  },
+  q23: {
+    '01':'AI as a personal assistant (individual productivity use)',
+    '02':'AI as a co-pilot in workflows (AI assists humans in task execution)',
+    '03':'Human + AI teams (defined roles where humans supervise, manage exceptions, and improve AI)',
+    '04':'Autonomous AI (AI executes most steps; humans intervene only for exceptions or compliance)',
+    '96':'We do not have a defined Human + AI collaboration model yet','98':'Other'
+  }
+};
+
+// ── COLLECT PAYLOAD ──
+function collectPayload(ref) {
+  const ts = new Date().toISOString();
+  const getLabel = (q, code) => (LABELS[q] && LABELS[q][code]) ? LABELS[q][code] : code;
+
+  // Single-select helper
+  function single(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : '';
+  }
+  // Single-select with OE override
+  function singleOE(name, oeId) {
+    const code = single(name);
+    if (code === '98' && oeId) {
+      const oe = document.getElementById(oeId);
+      return { code, label: (oe && oe.value.trim()) ? oe.value.trim() : 'Other' };
+    }
+    return { code, label: getLabel(name, code) };
+  }
+  // Multi-select
+  function multi(name) {
+    const checked = [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.value);
+    const labels = checked.map(c => getLabel(name, c));
+    return { codes: checked.join('|'), label: labels.join('; ') };
+  }
+  // Matrix row
+  function matrixRow(name, map) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    if (!el) return { code: '', label: '' };
+    return { code: el.value, label: (map && map[el.value]) ? map[el.value] : el.value };
+  }
+
+  const matScale = {'1':'Significantly ahead','2':'Somewhat ahead','3':'About the same','4':'Somewhat behind','5':'Significantly behind'};
+
+  const q1  = singleOE('q1','q1-oe');
+  const q2  = singleOE('q2','q2-oe');
+  const q3  = singleOE('q3', null);
+  const q4  = singleOE('q4', null);
+  const q5  = singleOE('q5','q5-oe');
+  const q6  = multi('q6');
+  const q7  = singleOE('q7', null);
+  const q8  = singleOE('q8', null);
+  const q9  = multi('q9');
+  const q10 = multi('q10');
+  const q11 = singleOE('q11', null);
+  const q12 = multi('q12');
+  const q13 = multi('q13');
+  const q14 = multi('q14');
+  const q15 = singleOE('q15', null);
+  const q16 = singleOE('q16', null);
+  const q17 = singleOE('q17', null);
+  const q18 = singleOE('q18', null);
+  const q19 = singleOE('q19', null);
+  const q20_1 = matrixRow('q20_1', matScale);
+  const q20_2 = matrixRow('q20_2', matScale);
+  const q20_3 = matrixRow('q20_3', matScale);
+  const q20_4 = matrixRow('q20_4', matScale);
+  const q20_5 = matrixRow('q20_5', matScale);
+  const q20_6 = matrixRow('q20_6', matScale);
+  const q21 = singleOE('q21', null);
+  const q22 = multi('q22');
+  const q23 = singleOE('q23', null);
+  const q24 = (document.getElementById('q24-oe') || {}).value || '';
+  const q10a = (document.getElementById('q10a-oe') || {}).value || '';
+
+  return {
+    timestamp:               ts,
+    respondent_ref:          ref,
+    // Section A
+    q1_job_title:            q1.label,  q1_code:               q1.code,
+    q2_industry:             q2.label,  q2_code:               q2.code,
+    q3_geography:            q3.label,  q3_code:               q3.code,
+    q4_revenue:              q4.label,  q4_code:               q4.code,
+    q5_org_size:             q5.label,  q5_code:               q5.code,
+    // Section B
+    q6_ai_technologies:      q6.label,  q6_codes:              q6.codes,
+    q7_ai_maturity:          q7.label,  q7_code:               q7.code,
+    q8_ai_budget_pct:        q8.label,  q8_code:               q8.code,
+    q9_ai_integration:       q9.label,  q9_codes:              q9.codes,
+    q10_ai_functions:        q10.label, q10_codes:             q10.codes,
+    q10a_oe:                 q10a,
+    q11_ai_owner:            q11.label, q11_code:              q11.code,
+    q12_ai_barriers:         q12.label, q12_codes:             q12.codes,
+    q13_ai_roi_measures:     q13.label, q13_codes:             q13.codes,
+    q14_ai_partners:         q14.label, q14_codes:             q14.codes,
+    // Section C
+    q15_competitive_position: q15.label, q15_code:            q15.code,
+    q16_ai_innovation_role:   q16.label, q16_code:            q16.code,
+    q17_ai_budget_direction:  q17.label, q17_code:            q17.code,
+    q18_ai_access_breadth:    q18.label, q18_code:            q18.code,
+    // Section D
+    q19_leadership_alignment: q19.label, q19_code:            q19.code,
+    q20_1:                   q20_1.label, q20_1_code:          q20_1.code,
+    q20_2:                   q20_2.label, q20_2_code:          q20_2.code,
+    q20_3:                   q20_3.label, q20_3_code:          q20_3.code,
+    q20_4:                   q20_4.label, q20_4_code:          q20_4.code,
+    q20_5:                   q20_5.label, q20_5_code:          q20_5.code,
+    q20_6:                   q20_6.label, q20_6_code:          q20_6.code,
+    // Section E
+    q21_prod_deployment:     q21.label,  q21_code:             q21.code,
+    q22_responsible_ai:      q22.label,  q22_codes:            q22.codes,
+    q23_human_ai_model:      q23.label,  q23_code:             q23.code,
+    // Section F
+    q24_open_end:            q24,
+    // Q25 contact
+    q25_name:  (document.getElementById('q25_name')  || {}).value || '',
+    q25_title: (document.getElementById('q25_title') || {}).value || '',
+    q25_org:   (document.getElementById('q25_org')   || {}).value || '',
+    q25_email: (document.getElementById('q25_email') || {}).value || '',
+    q25_phone: (document.getElementById('q25_phone') || {}).value || '',
+    // Admin
+    disqualified: 'No',
+    dq_reason: ''
+  };
+}
+
+// ── SUBMIT SURVEY ──
+// Uses no-cors POST (Apps Script requires this from GitHub Pages).
+// no-cors means we can't read the response body — fetch resolves on network send.
+// We set localStorage lock immediately on success so the race in init cannot reset.
+async function submitSurvey() {
+  const btn = document.getElementById('btn-submit');
+  if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+  const urlRef = new URLSearchParams(window.location.search).get('ref') || '';
+  const payload = collectPayload(urlRef);
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // Mark as done in localStorage BEFORE showing complete screen
+    // so that if init's server-check resolves concurrently it sees 'done' and stops.
+    if (urlRef) localStorage.setItem('fc_ai_survey_done_' + urlRef, 'done');
+    history.push('s-complete');
+    showScreen('s-complete');
+  } catch (err) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Submit Survey →'; }
+    alert('Submission error: ' + err.message + '. Please try again.');
+  }
+}
+
+// ── INIT ──
+// RACE CONDITION FIX: block the survey from rendering until the ref-check resolves.
+// Show a neutral loading state in the intro card while checking; replace it on result.
+// This prevents the user from advancing while init() is still in-flight.
+(async function init() {
+  const urlRef = new URLSearchParams(window.location.search).get('ref') || '';
+  const lsKey = urlRef ? 'fc_ai_survey_done_' + urlRef : null;
+
+  // Show "already completed" message — replaces the entire intro screen content
+  // including the nav row so no "Begin Survey" button is visible.
+  function showAlreadyDone() {
+    const introScreen = document.getElementById('s-intro');
+    if (introScreen) {
+      introScreen.innerHTML = `
+        <div class="intro-card">
+          <div class="intro-top">
+            <div class="intro-survey-tag">AI Innovation Survey 2026</div>
+            <div class="intro-title">Survey Already Completed</div>
+          </div>
+          <div class="intro-body">
+            <p class="intro-text">This survey link has already been used. Each link can only be completed once.</p>
+            <p class="intro-text">If you believe this is an error, please contact the research team at <strong>research@thinkermediagroup.com</strong>.</p>
+          </div>
+        </div>`;
+    }
+    // Ensure no other screen is active
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    introScreen.classList.add('active');
+    document.getElementById('progressWrap').style.display = 'none';
+  }
+
+  // Show a brief loading state so the user cannot interact while we check the ref.
+  // This is the key fix for the race condition — intro starts hidden, we reveal it
+  // only after the check resolves.
+  const introScreen = document.getElementById('s-intro');
+  // Remove the hardcoded 'active' so nothing is visible during the check
+  introScreen.classList.remove('active');
+
+  // 1. Check localStorage first (instant)
+  if (lsKey && localStorage.getItem(lsKey) === 'done') {
+    showAlreadyDone();
+    return;
+  }
+
+  // 2. If a ref is present, verify with the server (async check)
+  if (urlRef) {
+    try {
+      const res = await fetch(SCRIPT_URL + '?action=check&ref=' + encodeURIComponent(urlRef));
+      const data = await res.json();
+      if (data.used) {
+        if (lsKey) localStorage.setItem(lsKey, 'done');
+        showAlreadyDone();
+        return;
+      }
+    } catch (e) {
+      // Server check failed — fail open, allow respondent through
+    }
+  }
+
+  // All clear: show the intro screen normally
+  showScreen('s-intro');
+})();
+</script>
+</body>
+</html>
